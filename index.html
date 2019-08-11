@@ -1,0 +1,23 @@
+<head></head>
+<body>
+  <h1>Hello World</h1>
+  <form class="" action="index.html" method="post">
+    <div class="">
+      <label for="">Select a video</label>
+      <input type="file" name="" value="" accept="video/*">
+      <button type="submit" name="button">Upload</button>
+
+      <script type="text/javascript">
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        document.querySelector('form').addEventListener('submit');
+        event.preventDefault();
+        const {path} = document.querySelector('input').files[0]
+
+        ipcRenderer.send('video:submit', path);
+      </script>
+    </div>
+
+  </form>
+</body>
