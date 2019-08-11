@@ -7,15 +7,22 @@
       <input type="file" name="" value="" accept="video/*">
       <button type="submit" name="button">Upload</button>
 
+      <h1 id="result"></h1>
+
       <script type="text/javascript">
         const electron = require('electron');
         const {ipcRenderer} = electron;
 
-        document.querySelector('form').addEventListener('submit');
-        event.preventDefault();
-        const {path} = document.querySelector('input').files[0]
+        document.querySelector('form').addEventListener(('submit'), (event) => {
+          event.preventDefault();
+          const {path} = document.querySelector('input').files[0]
 
-        ipcRenderer.send('video:submit', path);
+          ipcRenderer.send('video:submit', path);
+        });
+
+        ipcRenderer.on(('video:metadata'), (event, duration) => {
+          querySelector('#result').innerHTML = `Video is ${duration} seconds.`;
+        })
       </script>
     </div>
 
